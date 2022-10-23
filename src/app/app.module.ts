@@ -38,6 +38,8 @@ import { ApiUserCreateComponent } from './pages/api-user/api-user-create/api-use
 import { ApiUserEditComponent } from './pages/api-user/api-user-edit/api-user-edit.component';
 import { ApiUserMainViewComponent } from './pages/api-user/api-user-main-view/api-user-main-view.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ApiRouteCreateComponent } from './pages/api-route/api-route-create/api-route-create.component';
+import { ApiRouteMainViewComponent } from './pages/api-route/api-route-main-view/api-route-main-view.component';
 
 @NgModule({
   declarations: [
@@ -51,7 +53,9 @@ import { HttpClientModule } from '@angular/common/http';
     AppMatConfirmDialogComponent,
     ApiUserCreateComponent,
     ApiUserEditComponent,
-    ApiUserMainViewComponent
+    ApiUserMainViewComponent,
+    ApiRouteCreateComponent,
+    ApiRouteMainViewComponent
   ],
   imports: [
     BrowserModule,
@@ -102,6 +106,6 @@ import { HttpClientModule } from '@angular/common/http';
   ],
   providers: [MatDatepickerModule,  ExcelServiceService , DatePipe],
   bootstrap: [AppComponent],
-  entryComponents:[ApiUserCreateComponent,AppMatConfirmDialogComponent]
+  entryComponents:[ApiUserCreateComponent,ApiRouteCreateComponent,AppMatConfirmDialogComponent]
 })
 export class AppModule { }

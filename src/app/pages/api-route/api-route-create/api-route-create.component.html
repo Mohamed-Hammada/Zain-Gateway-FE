@@ -1,0 +1,65 @@
+
+<mat-toolbar>
+
+  <span>{{service.form.controls['id'].value?"Edit Route":"Enter New Route"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" (ngSubmit)="onFormSubmit()" class="normal-form">
+  <mat-grid-list cols="2" rowHeight="360px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="id">
+
+
+        <mat-form-field>
+          <input formControlName="path" matInput placeholder="Path">
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <mat-select formControlName="method" placeholder="*Http Method">
+              <!-- <mat-option>None</mat-option> -->
+              <ng-container *ngFor="let method of allowedHttpMethod">
+                  <mat-option value="{{method}}">{{method}}</mat-option>
+              </ng-container>
+          </mat-select>
+      </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="uri" matInput placeholder="URI">
+        </mat-form-field>
+
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="retry_count" matInput placeholder="No. of Retries">
+        </mat-form-field>
+
+        <mat-form-field>
+          <input formControlName="retry_first_backoff_in_milli_seconds" matInput placeholder="First Retry Backoff(ms)">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="retry_max_backoff_in_milli_seconds" matInput placeholder="Max Retry Backoff(ms)">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="response_timeout_in_milli_seconds" matInput placeholder="Response Timeout(ms)">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="connect_timeout_in_milli_seconds" matInput placeholder="Connect Timeout(ms)">
+        </mat-form-field>
+        <div class="button-row">
+          <!-- [disabled]="service.form.invalid" -->
+          <button mat-raised-button color="primary" type="submit">Save</button>
+          <button id='buttonReset' mat-raised-button color="warn" type="reset">Clear All</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

@@ -1,0 +1,119 @@
+<div class="search-div">
+
+  <mat-form-field class="search-form-field" floatLabel="never">
+    <input matInput [(ngModel)]="searchKey" placeholder="Search" autocomplete="off"
+      (keyup)="applyFilter($any($event.target).value)">
+    <button mat-button matSuffix mat-icon-button aria-label="Clear" *ngIf="searchKey" (click)="onSearchClear()">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <button mat-raised-button (click)="onCreate()">
+    <mat-icon>add</mat-icon>Add Route
+  </button>
+  <button mat-button matSuffix mat-icon-button (click)="exportAsXLSX()">
+    <div class="icons8-microsoft-excel"></div>
+  </button>
+  <!-- <button mat-button matSuffix mat-icon-button (click)="loadData()">
+      <mat-icon style="color:green">autorenew</mat-icon>
+  </button> -->
+
+
+
+  <span class="fill-remaining-space"></span>
+</div>
+
+
+
+<div class="mat-elevation-z8">
+
+
+  <mat-table [dataSource]="dataArray" matSort>
+    <ng-container matColumnDef="UPDATE">
+      <mat-header-cell *matHeaderCellDef></mat-header-cell>
+      <mat-cell *matCellDef="let row">
+        <button mat-icon-button (click)="onEdit(row)">
+          <mat-icon>launch</mat-icon>
+        </button>
+        <button mat-icon-button color="warn" (click)="onDelete(row.id)">
+          <mat-icon>delete_outline</mat-icon>
+        </button>
+      </mat-cell>
+    </ng-container>
+
+
+
+
+    <ng-container matColumnDef="PATH">
+      <mat-header-cell *matHeaderCellDef>Path</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.path }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="METHOD">
+      <mat-header-cell *matHeaderCellDef>Http Method</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.method }}
+      </mat-cell>
+    </ng-container>
+
+    <ng-container matColumnDef="URI">
+      <mat-header-cell *matHeaderCellDef>URI</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.uri }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="RETRYCOUNT">
+      <mat-header-cell *matHeaderCellDef>No. of Retries</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.retry_count }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="RETRYFIRSTBACKOFFMS">
+      <mat-header-cell *matHeaderCellDef>First Retry Backoff(ms)</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.retry_first_backoff_in_milli_seconds }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="RETRYMAXBACKOFFMS">
+      <mat-header-cell *matHeaderCellDef>Max Retry Backoff(ms)</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.retry_max_backoff_in_milli_seconds }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="RESPONSETIMEOUTMS">
+      <mat-header-cell *matHeaderCellDef>Response Timeout(ms)</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.response_timeout_in_milli_seconds }}
+      </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="CONNECTTIMEOUTMS">
+      <mat-header-cell *matHeaderCellDef>Connect Timeout(ms)</mat-header-cell>
+      <mat-cell *matCellDef="let element ; let i = index">
+        {{ element.connect_timeout_in_milli_seconds }}
+      </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="loading">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        Loading data...
+      </mat-footer-cell>
+    </ng-container>
+    <ng-container matColumnDef="noData">
+      <mat-footer-cell *matFooterCellDef colspan="6">
+        No data.
+      </mat-footer-cell>
+    </ng-container>
+
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;let i = index"></mat-row>
+    <mat-footer-row *matFooterRowDef="['loading']" [ngClass]="{'hide':dataArray!=null}"></mat-footer-row>
+    <mat-footer-row *matFooterRowDef="['noData']" [ngClass]="{'hide':!(dataArray!=null && dataArray.data.length==0)}">
+    </mat-footer-row>
+
+  </mat-table>
+  <mat-paginator [pageSizeOptions]="[5, 10, 15 , 20 , 50 , 100]" [pageSize]="20" showFirstLastButtons></mat-paginator>
+
+</div>
