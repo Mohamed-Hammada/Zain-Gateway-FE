@@ -1,0 +1,55 @@
+<mat-sidenav-container class="sidenav-container">
+  <!-- [mode]="(isHandset$ | async) ? 'over' : 'side'" -->
+  <!-- [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+   [opened]="!(isHandset$ | async)"
+  -->
+  <mat-sidenav #drawer class="sidenav" fixedInViewport="false" position="start"
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'" [mode]="(isHandset$ | async) ? 'over' : 'side'"
+    [opened]="false">
+    <!-- <mat-toolbar>Available Routes</mat-toolbar> -->
+
+    <mat-toolbar></mat-toolbar>
+    <img src="/assets/logo.b074b60.svg" alt="شعار زين Home" width="160" height="42.75" class="logo img-fluid lazyLoad isLoaded" data-v-31fdcd86="">
+    <mat-toolbar></mat-toolbar>
+
+    <mat-nav-list >
+
+      <a  mat-list-item routerLink="/userLimiter" routerLinkActive="active"
+        (click)="drawer.toggle()">Limit Users</a>
+        <a  mat-list-item routerLink="/apiUser" routerLinkActive="active"
+        (click)="drawer.toggle()">Api User</a>
+
+
+
+
+
+      <a mat-list-item routerLink="/login" routerLinkActive="active" (click)="logOut(drawer)">Exit</a>
+    </mat-nav-list>
+
+
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <!-- *ngIf="isHandset$ | async" -->
+    <mat-toolbar color="primary" >
+      <mat-toolbar-row>
+        <!-- <span class="example-spacer"></span> -->
+
+        <button type="button" aria-label="Toggle sidenav" mat-icon-button (click)="drawer.toggle()"
+          *ngIf="isAuthorized">
+          <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+        </button>
+      <img src="/assets/logo.af74f849.svg" alt="شعار زين Home" width="160" height="42.75" class="logo img-fluid lazyLoad isLoaded" data-v-31fdcd86="">
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <!-- Add Content Here -->
+    <!-- for production -->
+    <app-login (isAuthorized)='isAuthorized=$event' *ngIf='!isAuthorized'></app-login>
+    <div id="imageContainer" *ngIf='isAuthorized'>
+      <router-outlet></router-outlet>
+    </div>
+
+    <!-- for test -->
+    <!-- <app-create-branch></app-create-branch> -->
+
+  </mat-sidenav-content>
+</mat-sidenav-container>
