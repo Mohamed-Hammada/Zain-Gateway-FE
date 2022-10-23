@@ -1,0 +1,60 @@
+<mat-toolbar>
+
+  <span>{{service.form.controls['id'].value?"Edit Route":"Enter New Route"}}</span>
+  <span class="fill-remaining-space"></span>
+  <button class="btn-dialog-close" mat-stroked-button (click)="onClose()" tabIndex="-1">
+    <mat-icon>clear</mat-icon>
+  </button>
+</mat-toolbar>
+
+<form [formGroup]="service.form" (ngSubmit)="onFormSubmit()" class="normal-form">
+  <mat-grid-list cols="2" rowHeight="360px">
+    <mat-grid-tile>
+      <div class="controles-container">
+        <input type="hidden" formControlName="id">
+
+
+        <input type="hidden" formControlName="active">
+
+
+
+        <mat-form-field>
+          <mat-select formControlName="route_id" placeholder="*Path">
+            <!-- <mat-option value="service.form.controls['route_id'].value" > {{service.form.controls['method'].value + '>> ' +  service.form.controls['path'].value }} </mat-option> -->
+            <ng-container *ngFor="let route of routeList">
+              <mat-option value="{{route['id']}}">{{ route['method'] + '>> ' +  route['path']}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+
+        <mat-form-field>
+          <mat-select formControlName="user_id" placeholder="*User Name">
+            <!-- <mat-option>None</mat-option> -->
+            <ng-container *ngFor="let user of usersList">
+              <mat-option value="{{user['id']}}">{{user['name']}}</mat-option>
+            </ng-container>
+          </mat-select>
+        </mat-form-field>
+
+
+      </div>
+    </mat-grid-tile>
+    <mat-grid-tile>
+      <div class="controles-container">
+        <mat-form-field>
+          <input formControlName="threshold" matInput placeholder="Number of Requests Per TTL">
+        </mat-form-field>
+        <mat-form-field>
+          <input formControlName="ttl" matInput placeholder="Time to Live (ms)">
+        </mat-form-field>
+
+        <div class="button-row">
+          <!-- [disabled]="service.form.invalid" -->
+          <button mat-raised-button color="primary" type="submit">Save</button>
+          <button id='buttonReset' mat-raised-button color="warn" type="reset">Clear All</button>
+        </div>
+      </div>
+    </mat-grid-tile>
+  </mat-grid-list>
+</form>

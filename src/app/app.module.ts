@@ -40,6 +40,8 @@ import { ApiUserMainViewComponent } from './pages/api-user/api-user-main-view/ap
 import { HttpClientModule } from '@angular/common/http';
 import { ApiRouteCreateComponent } from './pages/api-route/api-route-create/api-route-create.component';
 import { ApiRouteMainViewComponent } from './pages/api-route/api-route-main-view/api-route-main-view.component';
+import { ApiUserLimiterMainViewComponent } from './pages/api-user-limiter/api-user-limiter-main-view/api-user-limiter-main-view.component';
+import { ApiUserLimiterCreateComponent } from './pages/api-user-limiter/api-user-limiter-create/api-user-limiter-create.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +57,9 @@ import { ApiRouteMainViewComponent } from './pages/api-route/api-route-main-view
     ApiUserEditComponent,
     ApiUserMainViewComponent,
     ApiRouteCreateComponent,
-    ApiRouteMainViewComponent
+    ApiRouteMainViewComponent,
+    ApiUserLimiterMainViewComponent,
+    ApiUserLimiterCreateComponent
   ],
   imports: [
     BrowserModule,
@@ -106,6 +110,6 @@ import { ApiRouteMainViewComponent } from './pages/api-route/api-route-main-view
   ],
   providers: [MatDatepickerModule,  ExcelServiceService , DatePipe],
   bootstrap: [AppComponent],
-  entryComponents:[ApiUserCreateComponent,ApiRouteCreateComponent,AppMatConfirmDialogComponent]
+  entryComponents:[ApiUserCreateComponent,ApiRouteCreateComponent,ApiUserLimiterCreateComponent,AppMatConfirmDialogComponent]
 })
 export class AppModule { }
